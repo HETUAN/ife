@@ -1,0 +1,82 @@
+*{margin:0px;padding:0px;}
+
+header{
+    margin: 0px 10px; 
+    border: 1px solid red;
+    }
+footer{
+    margin: 0px 10px; 
+    border: 1px solid red;
+    }
+.content{
+    margin: 0px 10px; 
+    border: 0px solid red;
+    background-color: gray;
+    height: auto;
+    overflow: hidden;
+}
+ .content-left{
+     width:200px;
+     height:100%;
+     float: left;
+     margin: 20px 0px 20px 20px;
+     border: 0px solid red;
+     background-color: #FFFFFF;
+ }
+ 
+ .content-left .team{  
+     width:200px;
+     height:100px;
+    border: 0px solid red;
+ }
+ 
+ .content-left .team img{ 
+    width:80px;
+    height:80px; 
+    float:left;   
+    margin: 10px;
+    border: 0px solid red;
+ }
+ .content-left .team span{ 
+     margin-top:10px;
+     text-align: center;
+     width:100px;
+    float:right;  
+    border: 0px solid red;
+ }
+ .content-center{   
+     padding:10px; 
+     background-color: #FFFFFF; 
+     margin-top:20px;
+     margin-left:240px;
+     margin-right:160px;
+    border: 0px solid red;
+ }
+ .content-right{
+     width:120px;
+     height:100%;
+     float: right;
+     margin: 20px 20px 20px 0px;
+     background-color: #FFFFFF;
+     border: 0px solid red;  
+ }
+ .content-right .member{
+     width: 120px;
+     height: 100px;
+     border: 0px solid red;
+ }
+ 
+ .content-right .member img{
+     width: 80px;
+     height: 80px;
+     margin: 10px 20px ;
+ }
+ 
+ .content-right .member:first-child{
+     margin-top: 10px;
+ }
+ 
+ .content-right .member:last-child{
+     margin-bottom: 10px;
+ }
+  
