@@ -44,7 +44,7 @@ body {
  	overflow: hidden;
  }
  .content .right{
- 	width:200px;
+ 	width:300px;
  	float: right; 
  	height:400px;
  	margin: 20px 20px 20px 10px;
@@ -54,10 +54,18 @@ body {
  }
 .content .left{ 
 	height:500px;
-	margin: 20px 240px 20px 20px;
+	margin: 20px 340px 20px 20px;
  	border-right: 3px solid gray;
  	border-bottom: 3px solid gray; 
  	background-color: #FFFFFF;
+}
+
+.content .right h3{
+    height:40px;
+    line-height: 40px;
+    border-left: 3px solid gray;
+    margin-left: 10px;
+    padding-left: 5px;
 }
 
 .copyright {
