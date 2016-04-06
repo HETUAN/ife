@@ -39,26 +39,129 @@ body {
     display: inline-block;
 }
  .content {
- 	margin: 0px;
- 	height:600px;
+ 	margin: 0px; 
  	overflow: hidden;
  }
  .content .right{
- 	width:200px;
- 	float: right; 
- 	height:400px;
+ 	width:350px;
+ 	float: right;  
  	margin: 20px 20px 20px 10px;
  	border-right: 3px solid gray;
  	border-bottom: 3px solid gray; 
  	background-color: #FFFFFF;
  }
-.content .left{ 
-	height:500px;
-	margin: 20px 240px 20px 20px;
+
+ .content .right h2{
+    height:40px;
+    line-height: 40px;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 3px solid gray;
+ }
+
+ .content .right div{
+ 	margin: 10px 0px;
+ } 
+.emailaddress label{
+    width: 120px;
+    float: left;
+    text-align: right;
+}
+.emailaddress input,textarea{
+	margin-left: 10px;
+	border: 1px solid gray;
+}
+ 
+input[type="button"]{
+	margin-left: 20px;
+	margin-bottom: 20px;
+	border: 1px solid gray;
+	width:300px;
+	height:30px;
+	line-height: 30px;
+	background-color: rgb(51,85,208);
+	text-align: center;
+	font-size: 16px;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+}
+.errormsg{
+	margin-left: 130px;
+}
+.content .left{  
+	margin: 20px 390px 20px 20px; 
+}
+
+.content .left article{
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #FFFFFF;
  	border-right: 3px solid gray;
  	border-bottom: 3px solid gray; 
- 	background-color: #FFFFFF;
 }
+
+.content .left article .author{
+	text-indent: 0em;
+	font-size: 14px;
+	color:gray;
+}
+
+.content .left article p{
+	text-indent: 2em;
+	font-size: 16px;
+	color:black;  
+	line-height: 180%;
+}
+
+.content .left article ul{
+	list-style: none;
+}
+
+.content .left article
+{
+	overflow: hidden;
+}
+.content .left article figure{
+	margin: 10px;
+	float: left;
+	border: 1px solid gray;
+	padding: 10px;
+}
+.content .left article figure figcaption{
+	text-align: center;
+}
+.content .left article figure img{
+	width: 120px;
+	height:100px;
+}
+ 
+.content .left article table{
+	border:0px;
+	width: 100%;
+	margin: 0px;
+	padding:0px;
+	border-spacing: 0px;
+	line-height: 22px;
+	font-size: 12px;
+}
+.content .left article table thead{
+	background-color: black;
+	color: white;
+}
+.content .left article table tr td{
+	border-left: 1px solid gray;
+	border-top: 1px solid gray;
+}
+
+.content .left article table tr td:last-child{
+	border-right: 1px solid gray;
+}
+
+.content .left article table tfoot{
+	background-color: gray;
+	color: black; 
+}  
 
 .copyright {
     height: 70px;
