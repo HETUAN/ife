@@ -24,8 +24,7 @@ header .pagename{
 	line-height: 100px;
 }
 
-header .pagedate{ 
-	vertical-align: bottom;
+header .pagedate{  
 	font-family: 黑体;
 	float: right;
 	color: #d45d5c; 
@@ -42,24 +41,36 @@ header hr{
 	margin: 0px 44px; 
 }
 
-.content{ 
+.content{  
+	width: 100%;
 	margin: 0px auto; 
 	background-color: #FFFFFF; 
 }
 .content .top{ 
-	margin: 0px auto; 
+	margin: 0px auto 0px; 
 	background-color: #FFFFFF; 
+	overflow: hidden;
 }
 .top .topleft img{
+	float: left;
 	width: 641px;
 	height: 301px;
 }
 
 .top .topright{
+	float: right;
 	margin-left:20px;
+	width:203px;
+	border-top: 2px solid #cc8091;
 }
-
-
+.topright h1{
+	font-size: 24px;
+	text-decoration: underline;
+}
+.topright h1:first-letter{
+	font-size: 32px;	
+	text-decoration: underline;
+}
 footer{
 	width: 980px;
 	margin: 10px auto;
