@@ -1,0 +1,71 @@
+*{margin: 0px;padding: 0px;
+	font-size: 12px;}
+body{ 
+margin: 0px;padding: 0px;
+	background-color: gray;
+}
+header{
+	width: 980px;
+	margin: 0px auto;
+	height: 61px;
+	background-color: #FFFFFF; 
+}
+
+header .pagename{
+	width: 110px;
+	height: 61px;
+	font-size: 12px;
+	text-align: left;
+	float: left;
+	color: white;
+	background-color: #d45d5c;
+	font-family: 黑体; 
+	margin-left: 44px; 
+	line-height: 100px;
+}
+
+header .pagedate{ 
+	vertical-align: bottom;
+	font-family: 黑体;
+	float: right;
+	color: #d45d5c; 
+	margin-right: 44px; 
+	line-height: 100px;
+}
+
+header hr{ 
+	width: 892px;
+	height: 2px;
+	clear:left;
+	background-color: #938e8c;
+	border: 0px; 
+	margin: 0px 44px; 
+}
+
+.content{ 
+	margin: 0px auto; 
+	background-color: #FFFFFF; 
+}
+.content .top{ 
+	margin: 0px auto; 
+	background-color: #FFFFFF; 
+}
+.top .topleft img{
+	width: 641px;
+	height: 301px;
+}
+
+.top .topright{
+	margin-left:20px;
+}
+
+
+footer{
+	width: 980px;
+	margin: 10px auto;
+}
+
+.content{
+	width:980px;
+	margin: 10px auto;
+}
