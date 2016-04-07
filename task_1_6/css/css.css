@@ -9,6 +9,7 @@ header{
 	margin: 0px auto;
 	height: 61px;
 	background-color: #FFFFFF; 
+	border: 1px solid red;
 }
 
 header .pagename{
@@ -38,28 +39,30 @@ header hr{
 	clear:left;
 	background-color: #938e8c;
 	border: 0px; 
-	margin: 0px 44px; 
+	margin: 0px 44px;  
 }
 
 .content{  
 	width: 100%;
 	margin: 0px auto; 
 	background-color: #FFFFFF; 
+	border: 1px solid red;
 }
-.content .top{ 
+.top{ 
 	margin: 0px auto 0px; 
 	background-color: #FFFFFF; 
 	overflow: hidden;
 }
-.top .topleft img{
+.topleft img{
 	float: left;
 	width: 641px;
 	height: 301px;
 }
 
-.top .topright{
+.topright{
 	float: right;
-	margin-left:20px;
+	margin-left:0px;
+	margin-top: 40px;
 	width:203px;
 	border-top: 2px solid #cc8091;
 }
@@ -78,6 +81,13 @@ header hr{
   font-family: 楷体;
   line-height: 10px;
   margin-bottom: 10px;
+}
+.number1{
+	font-size: 116px;
+	font-family: 微软雅黑;
+	text-decoration: underline;
+	font-style: italic;
+	color:#76b86b;
 }
 footer{
 	width: 980px;
