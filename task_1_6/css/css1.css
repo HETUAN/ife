@@ -252,7 +252,7 @@ header hr {
     font-family: 黑体;
     font-weight: bolder;
     color: #11456b;
-    border-bottom: 2px solid #11456b;
+    border-bottom: 4px solid #11456b;
     padding-bottom: 5px;
 }
 
@@ -271,6 +271,7 @@ header hr {
 }
 
 .bottom-left-content {
+    float: left;
     margin-top: 20px;
     font-size: 12px;
     color: #767777;
@@ -294,15 +295,53 @@ header hr {
     height: 150px;
     float: right;
     display: inline-block; 
+    margin-top: 100px;
 }
 
 
 .bottom-right {
     width: 458px;
+    height: 275px;
     float: right;
+    position: relative;
+    border: 0px solid red;
 }
 
 .bottom-right-top img{
 	width: 458px;
 	height: 275px; 
 }
+.image-footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px; 
+    width: 458px;
+    height: 61px;
+    background-color: gray;
+    opacity: 0.5;
+    border: 0px solid red;
+}
+.image-footer-content{
+    position: absolute;
+    bottom:8px;
+    left:30px;
+    height: 44px; 
+    border-left: 3px solid #72b16a;
+    font-size: 26px;
+    color: #FFFFFF;
+    font-family: 微软雅黑;
+    padding-left: 5px;
+}
+
+.image-footer-content1{
+     font-size: 12px;
+     color: #72b16a;
+     font-style: italic;
+     word-spacing: 140%;
+}
+.bottom-right-bottom{
+    width:459px;
+    height: 318px;
+    background-color: gray;
+}
+
