@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 13</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <button id="button">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+(function() {
+  /*	
+  在注释下方写下代码
+  给按钮button绑定一个点击事件
+  在事件处理函数中
+  获取aqi-input输入的值，并显示在aqi-display中
+  
+
+  document.getElementById("aqi-input").addEventListener("keyup",function()
+  {
+  	document.getElementById("aqi-display").innerText = document.getElementById("aqi-input").value;
+  })
+*/
+  var $ = function(tagid)
+  {
+  return document.getElementById(tagid);
+  }
+  var btn = $("button");
+  var aqi_inpt = $("aqi-input");
+  var aqi_disp = $("aqi-display");
+
+  btn.addEventListener("click",function()
+  {
+  	aqi_disp.innerText = aqi_inpt.value;
+  })
+
+  aqi_inpt.onkeyup = function(event){
+    //console.log(obj);
+    console.log(event);
+    if(event.keyCode==13)
+    {
+      btn.click();
+    //aqi_disp.innerText = aqi_inpt.value;
+    }
+  }
+
+})();
+
+</script>
+</body>
+</html>

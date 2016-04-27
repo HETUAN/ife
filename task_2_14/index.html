@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 14</title>
+</head>
+
+<body>
+    <h3>污染城市列表</h3>
+    <ul id="aqi-list">
+        <!--   
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+    </ul>
+    <script type="text/javascript">
+    var aqiData = [
+        ["北京", 90],
+        ["上海", 50],
+        ["福州", 10],
+        ["广州", 50],
+        ["成都", 90],
+        ["西安", 100]
+    ];
+
+    var orderFun = function(arr) {
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            for (var j = i + 1; j < len; j++) {
+                if (arr[i][1] > arr[j][1]) {
+                    var item = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = item;
+                }
+            }
+        }
+        return arr;
+    };
+
+    var GetBigNum = function(num) {
+        var bignums = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+        var bigStr = "";
+        var smallStr = num.toString();
+        for (var i = 0; i < smallStr.length; i++) {
+            bigStr += bignums[parseInt(smallStr[i])];
+        }
+        return bigStr;
+    };
+
+    (function() {
+
+        /*
+        在注释下方编写代码
+        遍历读取aqiData中各个城市的数据
+        将空气质量指数大于60的城市显示到aqi-list的列表中
+        */
+        var tagul = document.getElementById("aqi-list");
+        var lihtml = "";
+        aqiData = orderFun(aqiData);
+        for (var idx = aqiData.length - 1; idx >= 0; idx--) {
+            var itemData = aqiData[idx];
+            //console.log(itemData);
+            if (itemData[1] > 60) {
+                var tagli = document.createElement("li");
+                lihtml += "<li>第" + GetBigNum(aqiData.length - idx) + "名：" + itemData[0].toString() + "，" + itemData[1].toString() + "</li>";
+                /*
+	            var oLi = document.createElement("li");
+	            oLi.innerHTML = '第'+arr[i]+'名：'+aqiData[i][0]+','+aqiData[i][1];
+	            oList.appendChild(oLi);
+	            */
+	            
+            } else {
+                break;
+            }
+            console.log(lihtml);
+            tagul.innerHTML = lihtml;
+        }
+    })();
+    </script>
+</body>
+
+</html>
