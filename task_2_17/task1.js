@@ -1,4 +1,4 @@
-﻿/* 数据格式演示
+/* 数据格式演示
 var aqiSourceData = {
   "北京": {
     "2016-01-01": 10,
@@ -79,7 +79,7 @@ function renderChart() {
 function TransferMonth() {
     // 此处应该考虑不使用Data类
     // 每月数据
-    var monthData = {}; 
+    var monthData = {};
     // 当前索引
     var idx = 1;
     // 当前是几月
@@ -87,17 +87,16 @@ function TransferMonth() {
     // 当前月份的数据数组
     var curData = [];
 
-    for (day in chartData) { 
-        var mouth = new Date(day).getMonth(); 
-        if(curmonth!=mouth)
-        {
-            monthData[curmonth+1] = arrayAverage(curData);
+    for (day in chartData) {
+        var mouth = new Date(day).getMonth();
+        if (curmonth != mouth) {
+            monthData[curmonth + 1] = arrayAverage(curData);
             curData.length = 0;
             curmonth = mouth;
         }
         curData.push(chartData[day]);
     }
-    monthData[curmonth+1] = arrayAverage(curData);
+    monthData[curmonth + 1] = arrayAverage(curData);
     return monthData;
 }
 
@@ -123,8 +122,7 @@ function TransferWeek() {
             weekidx = startweek;
             firstday = day;
         }
-        if(weekidx==1)
-        {
+        if (weekidx == 1) {
             firstday = day;
         }
         curweekdata.push(chartData[day]);
@@ -169,20 +167,42 @@ function randerChart(showData) {
         var value = showData[day];
         var div = document.createElement("div");
         div.style.width = rectWidth + "px";
-        div.style.height = showData[day] + "px";
+        //div.style.height = showData[day] + "px";
+        div.setAttribute("data-height", showData[day]);
         div.style.position = "absolute";
-        div.style.left = (idx * (rectWidth+2)) + "px";
+        div.style.left = (idx * (rectWidth + 2)) + "px";
         div.style.bottom = "0px";
-        div.title = "["+day+"]   "+value;
+        div.title = "[" + day + "]   " + value;
         //console.log(div);
         div.style.backgroundColor = getColorByValue(showData[day]);
         viewChart.appendChild(div);
         idx++;
     }
-    viewChart.style.width = ((rectWidth+2) * ++idx) + "px";
+    viewChart.style.width = ((rectWidth + 2) * ++idx) + "px";
     //console.log(viewChart);
+    inter = setInterval(addHeight, 100);
 }
 
+function addHeight(div, rectHeight) {
+    var divs = document.getElementById("aqi-chart-view").getElementsByTagName("div");
+    var len = divs.length;
+    console.log(len);
+    var finishNum = 0;
+    for (idx in divs) {
+    	var div = divs[idx];
+        var height = div.attributes["data-height"].nodeValue;
+        var curheight = div.style.height;
+        if (curheight + 10 < height) {
+            div.style.height = curheight + 10 + "px";
+        } else if (curheight < height) {
+            div.style.height = curheight + "px";
+        } else {
+            finishNum++;
+        }
+    }
+    if (finishNum >= len)
+        clearInterval(inter);
+}
 
 /**
  * 根据每日的数据显示表格
@@ -202,7 +222,7 @@ function randerChartByDay() {
         div.style.position = "absolute";
         div.style.left = (idx * rectWidth) + "px";
         div.style.bottom = "0px";
-        div.title = "["+day+"]   "+value;
+        div.title = "[" + day + "]   " + value;
         //console.log(div);
         div.style.backgroundColor = getColorByValue(chartData[day]);
         viewChart.appendChild(div);
