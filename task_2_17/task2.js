@@ -181,7 +181,7 @@ function randerChart(showData) {
     }
     viewChart.style.width = ((rectWidth + 2) * ++idx) + "px";
     //console.log(viewChart);
-    inter = setInterval(addHeight, 1);
+    inter = setInterval(addHeight, 100);
 }
 
 function addHeight(div, rectHeight) {
@@ -190,23 +190,17 @@ function addHeight(div, rectHeight) {
     console.log(len);
     var finishNum = 0;
     for (idx in divs) {
-        var divtag = document.getElementById(divs[idx].id);
-        //console.log(div);
-        //console.log(div.getAttribute("data-height"));
-        //console.log(divs[idx].attributes["data-height"].nodeValue);
-        //var height = divtag.getAttribute("data-height");
-        var height = divtag.attributes["data-height"].nodeValue;
-        //divtag.setAttribute("data-height", height);
-        //div.dataset.height = height;
+        var divtag = document.getElementById(divs[idx].id); 
+        var height = divtag.attributes["data-height"].nodeValue; 
         var curheightstr = divtag.style.height;
         var curheight = 0;
         if (curheightstr == "") {
-            curheight = 1;
+            curheight = 2;
         } else {
             curheight = parseInt(curheightstr.replace("px", ""));
         }
-        if (curheight + 1 < height) {
-            divtag.style.height = curheight + 1 + "px";
+        if (curheight + 2 < height) {
+            divtag.style.height = curheight + 2 + "px";
         } else if (curheight < height) {
             divtag.style.height = height + "px";
         } else {

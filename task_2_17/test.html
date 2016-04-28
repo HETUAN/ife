@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 17</title> 
+    <style type="text/css">
+    #animate{
+      width: 20px;
+      height: 20px;
+      background-color: #000000; 
+      position: absolute;
+      display: inline-block;
+      left: 100px;
+      bottom: 0px;
+    }
+    </style>
+    <script type="text/javascript">
+    window.onload = function(){
+    	var h = (Math.random()*500);
+    	document.getElementById("animate").setAttribute("data-height", h);
+    	inter = setInterval(animate,100);
+    }
+
+    function animate()
+    {
+    	var div = document.getElementById("animate");
+    	var maxheight = div.getAttribute("data-height");
+    	var h = div.style.height;
+    	console.log(h);
+    	var height = 0;
+    	if(h=="")
+    	{
+    		height = 20;
+    	}else{
+    		height = parseInt(h.replace("px","")) + 20; 
+    	} 
+    	if(height>maxheight)
+    	{
+    		clearInterval(inter);
+    		return;
+    	}
+    	console.log(height);
+    	div.style.height = (height)+"px";
+    }
+
+    </script>
+  </head>
+<body>
+<div id="animate">
+	asdf
+</div>
+	</body>
+	</html>
