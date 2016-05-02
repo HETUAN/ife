@@ -4,53 +4,76 @@
 <head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 17</title>
-    <script src="task1.js"></script>
+    <script src="task.js"></script>
     <style type="text/css">
-    textarea{
-    	width: 200px;
-    	height:200px;
+    textarea {
+        width: 200px;
+        height: 200px;
     }
-    span{
-    	margin-left: 10px;
-    	background-color: gray;
+    
+    span {
+        margin-left: 10px;
+        background-color: gray;
     }
     </style>
     <script type="text/javascript">
-        window.onload = function(){
-        	var inpttext = document.getElementById("inpttext")
-        	var insertbtn = document.getElementById("insertbtn")
-        	var sertext = document.getElementById("sertext")
-        	var searchbtn = document.getElementById("searchbtn")
-        	var show = document.getElementById("show")
+    window.onload = function() {
+        var inpttext = document.getElementById("inpttext")
+        var insertbtn = document.getElementById("insertbtn")
+        var sertext = document.getElementById("sertext")
+        var searchbtn = document.getElementById("searchbtn")
+        var show = document.getElementById("show")
 
-        	insertbtn.onclick = function(){
-        		var inpttext = document.getElementById("inpttext")
-        		var text = inpttext.value;
-        		//数字、中文、英文等， 回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等
-        		//var texts = text.match(/[^/w]/g)
-        		//var texts = text.split(" ");
-        		var textStr = "";
-        		var curStr = "";
-        		for(t in text)
-        		{
-        			console.log(text[t])
-        			//textStr+="<span>"+texts[t]+"</span>";
-        		}
-        	    //var show = document.getElementById("show")
-        	    //show.innerHTML = textStr;
-        	}
 
-        	searchbtn.onclick = function(){
-        		var s = document.getElementById("sertext").value
-        		var spans = document.getElementById("show").getElementsByTagName("span");
-        		for(idx in spans)
-        		{
-        			var curspan = spans[idx];
-        			var curStr = curspan.innerText;
+        var loadtextarea = function() {
+            var inpttext = document.getElementById("inpttext")
+            var text = inpttext.value;
+            //数字、中文、英文等， 回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等
 
-        		}
-        	}
+            var texts = text.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/i).filter(function(d) {
+                return d != '';
+            });
+            var textStr = "";
+            var curStr = "";
+            for (t in texts) {
+                console.log(texts[t])
+                textStr += "<span>" + texts[t] + "</span>";
+            }
+            var show = document.getElementById("show")
+            show.innerHTML = textStr;
         }
+
+        insertbtn.onclick = loadtextarea;
+        searchbtn.onclick = function() {
+            loadtextarea();
+            var s = document.getElementById("sertext").value;
+            var show = document.getElementById("show");
+            var spans = show.getElementsByTagName("span");
+            var newHtml = "";
+            for (idx in spans) {
+                var curspan = spans[idx];
+                var curStr = curspan.innerText;
+                if (curStr === undefined)
+                    continue;
+                var curStrs = curStr.split(s);
+                if (curStrs.length > 1) {
+                    var len = curStrs.length;
+
+                    newHtml += "<span >";
+                    for (var idx in curStrs) {
+                        newHtml += curStrs[idx];
+                        if (idx != curStrs.length - 1)
+                            newHtml += "<span style=\"background-color:red; margin-left:0px; \">" + s + "</span>";
+                    }
+                    newHtml += "</span>";
+                } else {
+                    newHtml += "<span >" + curStr + "</span>";
+                }
+            }
+            show.innerHTML = newHtml;
+
+        }
+    }
     </script>
 </head>
 
