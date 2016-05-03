@@ -1,0 +1,106 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 21</title>
+    <style type="text/css">
+    textarea {
+        width: 200px;
+        height: 200px;
+    }
+    
+    span {
+        margin-left: 10px;
+        background-color: gray;
+    }
+    
+    div {
+        min-height: 30px;
+    }
+    </style>
+    <script type="text/javascript">
+    var tags1 = [];
+    window.onload = function() {
+        var sertext = document.getElementById("sertext")
+
+        var inpttext = document.getElementById("inpttext")
+        var insertbtn = document.getElementById("insertbtn")
+        var searchbtn = document.getElementById("searchbtn")
+        sertext.onkeyup = function(e) {
+            //31、13,188
+            if (e.keyCode == 32 || e.keyCode == 13 || e.keyCode == 188) {
+                //console.log(e.keyCode);
+                if (addToTagsList1()) {
+                    RenderTag1();
+                }
+            }
+        }
+
+    }
+
+    var tagList1 = [];
+    var addToTagsList1 = function() {
+        var inpttext = document.getElementById("sertext");
+        var str = inpttext.value.trim();
+        if(str=="")
+            return false;
+        str = str.substr(str.length-1)==","?str.substr(0,str.length-1):str;
+        if (tagList1.filter(function(item) {
+                return item == str;
+            }).length > 0) {
+            return false;
+        }
+        tagList1.push(str.substr(0, str.length));
+        inpttext.value = "";
+        if (tagList1.length > 10)
+            tagList1.shift();
+        return true;
+    }
+
+    var RenderTag1 = function() {
+        var tags1 = document.getElementById("tags1");
+        var strHtml = "";
+        tags1.innerHTML = "";
+        for (var key in tagList1) {
+            var ele = document.createElement("span");
+            ele.innerText = tagList1[key];
+            tags1.appendChild(ele);
+            ele.onmouseover = function(){
+                var text = "删除"+this.innerText
+                this.innerText = text;
+                this.style.backgroundColor = "red";
+            };
+            ele.onmouseleave = function(){
+                var text =  this.innerText.replace("删除","")
+                this.innerText = text;
+                this.style.backgroundColor = "gray";
+            };
+            ele.onclick = function() {
+                var text = this.innerText.replace("删除","");
+                console.log(text);
+                tagList1 = tagList1.filter(function(item){return item!=text;})
+                RenderTag1();
+                //console.log(this.innerText);
+                //this.parentNode.removeChild(this);
+            }
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <p>
+        <input type="text" id="sertext" value="" />
+        <div id="tags1"></div>
+    </p>
+    <p>
+        <textarea id="inpttext"></textarea>
+        <br />
+        <input type="button" id="insertbtn" value="确认兴趣爱好" />
+        <br />
+        <div id="show2"></div>
+    </p>
+</body>
+
+</html>
