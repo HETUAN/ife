@@ -6,26 +6,44 @@
     <title>IFE JavaScript Task 21</title>
     <style type="text/css">
     div {
+        float: left;
         min-height: 30px;
+        min-width: 60px;
+        border: 1px solid black;
+        margin: 10px;
     }
     </style>
     <script type="text/javascript">
-
-    var show = function (){
+    var show = function() {
         // 
-        var tree = document.getElementById("tree");
-        for(var idx in tree.childNodes)
-        {
-            //
+        var tree = document.getElementById("tree").firstElementChild;
+        var oldnodes = [];
+        var newnodes = tree.children;
+        while (newnodes.length > 0) {
+            oldnodes = newnodes;
+            //newnodes.length = 0;
+            newnodes = [];
+            for (var idx in oldnodes) {
+                var node = oldnodes[idx];
+                for (var idxx in node.children)
+                    newnodes.push(node.children[idxx]);
+                node.borderColor = "red";
+                console.log(node);
+                setTimeout(function(){console.log("waiting...");},1000);
+            }
         }
-
     }
 
+
+    window.onload = function() {
+                setTimeout(function(){console.log("waiting...");},1000);
+        show();
+    }
     </script>
 </head>
 
 <body>
-    <p id="tree">
+    <div id="tree">
         <div>
             <div>
                 <div>
@@ -48,7 +66,7 @@
                 </div>
             </div>
         </div>
-    </p>
+    </div>
 </body>
 
 </html>
