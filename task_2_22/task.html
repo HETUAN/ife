@@ -18,25 +18,49 @@
         // 
         var tree = document.getElementById("tree").firstElementChild;
         var oldnodes = [];
-        var newnodes = tree.children;
+        var newnodes = [];
+        var len = tree.children.length;
+        for (var i = 0; i < len; i++)
+            newnodes.push(tree.children[i]);
         while (newnodes.length > 0) {
             oldnodes = newnodes;
             //newnodes.length = 0;
             newnodes = [];
-            for (var idx in oldnodes) {
+            var ll = oldnodes.length;
+            for (var idx = 0; idx<ll;idx++) {
                 var node = oldnodes[idx];
-                for (var idxx in node.children)
-                    newnodes.push(node.children[idxx]);
-                node.borderColor = "red";
-                console.log(node);
-                setTimeout(function(){console.log("waiting...");},1000);
+                //console.log(node);
+                if (node == null)
+                    continue;
+                var l = node.children.length;
+                for (var idxx = 0;idxx<l;idxx++)
+                {
+                    //newnodes[newnodes.length] = node.children[idxx]; 
+                    newnodes.push(node.children[idxx]); 
+                }
+                node.style.borderColor = "red";
+                setTimeout("resetColor("+node+")",1000)
+                //sleep(1000);
             }
         }
     }
 
-
+    function resetColor(node)
+    {
+        console.log(node.style.borderColor);
+        node.style.borderColor = "black";
+    }
+    function sleep(numberMillis) {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
+        }
+    }
     window.onload = function() {
-                setTimeout(function(){console.log("waiting...");},1000);
+        sleep(1000);
         show();
     }
     </script>
