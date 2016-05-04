@@ -27,41 +27,113 @@
             //newnodes.length = 0;
             newnodes = [];
             var ll = oldnodes.length;
-            for (var idx = 0; idx<ll;idx++) {
+            for (var idx = 0; idx < ll; idx++) {
                 var node = oldnodes[idx];
                 //console.log(node);
                 if (node == null)
                     continue;
                 var l = node.children.length;
-                for (var idxx = 0;idxx<l;idxx++)
-                {
+                for (var idxx = 0; idxx < l; idxx++) {
                     //newnodes[newnodes.length] = node.children[idxx]; 
-                    newnodes.push(node.children[idxx]); 
+                    newnodes.push(node.children[idxx]);
                 }
-                node.style.borderColor = "red";
-                setTimeout("resetColor("+node+")",1000)
-                //sleep(1000);
+                //node.style.borderColor = "red";
+                //setTimeout(function(){resetColor(node);}, 1000) 
+                setColor(node);
             }
+        }
+        console.log("end");
+    }
+
+    function setColor(node) {
+        node.style.backgroundColor = "red";
+        setTimeout(function() {
+            node.style.borderColor = "black";
+        }, 1000);
+    }
+
+    function resetColor(node) {
+        console.log(node);
+        node.style.borderColor = "black";
+    }
+
+    var middle = function(ele, arr) {
+        if (ele.childElementCount <= 0)
+            return;
+        var left = ele.firstElementChild;
+        var right = ele.lastElementChild;
+        if (left != undefined) {
+            arr.push(left);
+            prve(left, arr);
+        }
+        if (right != undefined) {
+            arr.push(right);
+            prve(right, arr);
         }
     }
 
-    function resetColor(node)
-    {
-        console.log(node.style.borderColor);
-        node.style.borderColor = "black";
-    }
-    function sleep(numberMillis) {
-        var now = new Date();
-        var exitTime = now.getTime() + numberMillis;
-        while (true) {
-            now = new Date();
-            if (now.getTime() > exitTime)
-                return;
+    var prve = function(ele, arr) {
+        if (ele.childElementCount <= 0)
+            return;
+        var left = ele.firstElementChild;
+        if (left != undefined) {
+            prve(left, arr);
+            arr.push(left);
+        }
+        var right = ele.lastElementChild;
+        if (right != undefined) {
+            prve(right, arr);
+            arr.push(right);
         }
     }
+
+    var behind = function(ele, arr) {
+        if (ele.childElementCount <= 0)
+            return;
+        var right = ele.lastElementChild;
+        if (right != undefined) {
+            prve(right, arr);
+            arr.push(right);
+        }
+        var left = ele.firstElementChild;
+        if (left != undefined) {
+            prve(left, arr);
+            arr.push(left);
+        }
+    }
+    var show = function(arr)
+    {
+        //
+        var ele = arr.shift();
+        if(ele==undefined||ele==null)
+            return;
+        ele.style.backgroundColor = "red";
+        setTimeout(function(){ele.style.backgroundColor = "white";show(arr)},1000);
+    }
+
     window.onload = function() {
-        sleep(1000);
-        show();
+        var pre = document.getElementById("pre")
+        pre.onclick = function() {
+            var node = document.getElementById("tree").firstElementChild;
+            var arr = [];
+            prve(node, arr);
+            arr.push(node);
+            show(arr);
+        };
+        var mid = document.getElementById("mid")
+        mid.onclick = function() {
+            var node = document.getElementById("tree").firstElementChild;
+            var arr = [];
+            middle(node, arr);
+            show(arr);
+        };
+        var beh = document.getElementById("beh")
+        beh.onclick = function() {
+            var node = document.getElementById("tree").firstElementChild;
+            var arr = [];
+            behind(node, arr);
+            show(arr);
+        };
     }
     </script>
 </head>
@@ -91,6 +163,9 @@
             </div>
         </div>
     </div>
+    <input type="button" id="pre" value="前序" />
+    <input type="button" id="mid" value="中序" />
+    <input type="button" id="beh" value="后序" />
 </body>
 
 </html>
