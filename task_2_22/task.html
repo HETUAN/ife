@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>IFE JavaScript Task 21</title>
+    <title>IFE JavaScript Task 22</title>
     <style type="text/css">
     div {
         float: left;
@@ -58,48 +58,45 @@
     }
 
     var middle = function(ele, arr) {
-        if (ele.childElementCount <= 0)
-            return;
         var left = ele.firstElementChild;
-        var right = ele.lastElementChild;
         if (left != undefined) {
-            arr.push(left);
-            prve(left, arr);
+            //arr.push(left);
+            middle(left, arr);
         }
+        arr.push(ele);
+        var right = ele.lastElementChild;
         if (right != undefined) {
-            arr.push(right);
-            prve(right, arr);
-        }
+            //arr.push(right);
+            middle(right, arr);
+        } 
     }
 
-    var prve = function(ele, arr) {
-        if (ele.childElementCount <= 0)
-            return;
+    var prve = function(ele, arr) { 
+        arr.push(ele);
         var left = ele.firstElementChild;
         if (left != undefined) {
             prve(left, arr);
-            arr.push(left);
+            //arr.push(left);
         }
         var right = ele.lastElementChild;
         if (right != undefined) {
             prve(right, arr);
-            arr.push(right);
-        }
+            //arr.push(right);
+        } 
     }
 
     var behind = function(ele, arr) {
-        if (ele.childElementCount <= 0)
-            return;
         var right = ele.lastElementChild;
         if (right != undefined) {
-            prve(right, arr);
-            arr.push(right);
+            behind(right, arr);
+            //arr.push(right);
         }
         var left = ele.firstElementChild;
         if (left != undefined) {
-            prve(left, arr);
-            arr.push(left);
+            behind(left, arr);
+            //arr.push(left);
         }
+        arr.push(ele);
     }
     var show = function(arr)
     {
@@ -116,14 +113,13 @@
         pre.onclick = function() {
             var node = document.getElementById("tree").firstElementChild;
             var arr = [];
-            prve(node, arr);
-            arr.push(node);
+            prve(node, arr); 
             show(arr);
         };
         var mid = document.getElementById("mid")
         mid.onclick = function() {
             var node = document.getElementById("tree").firstElementChild;
-            var arr = [];
+            var arr = []; 
             middle(node, arr);
             show(arr);
         };
@@ -131,7 +127,7 @@
         beh.onclick = function() {
             var node = document.getElementById("tree").firstElementChild;
             var arr = [];
-            behind(node, arr);
+            behind(node, arr); 
             show(arr);
         };
     }
