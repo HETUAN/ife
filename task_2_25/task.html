@@ -8,8 +8,48 @@
      
     </style>
     <script type="text/javascript">
-    var tree = {};
-    
+    var tree = function(id){
+    	var root = document.getElementById(id);
+    	if(root==null)
+    		return null;
+
+    	var curDeep = 0;
+    	var curElement = root;
+    	// 获取节点的深度
+    	var getDeep = function(ele){
+    		var d = 0;
+    		if(ele==root)
+    			return d;
+
+    		while(ele!=root){
+    			d++;
+    			ele = ele.parentElemant;
+    		}
+    		return d;
+    	}
+    	var Load = function(dataSource){
+
+    	};
+
+    	var addElement = function(ele){
+    		//
+    		var curElement.childElement.push(ele);
+    	}
+
+    	var addElement = function(name,check){
+    		var taga = null;
+    		var tagcheck = null;
+    		var tagspan = null;
+    			var e = document.createElementNS('<div><a></a><input type="checkbox" '+check==True?"checked":""+' /><span>'+name+'</span></div>');
+    			curElement.childElement.push(e);
+    		if(curElement.childElement.length>0)
+    		{
+    			//curElement
+    		} 
+
+    	}
+
+    }    
     window.onload = function() {        
     }
     </script>
@@ -20,6 +60,7 @@
         <div>
             <a>-</a>
             <input type="checkbox" checked="checked" />
+            <span>1</span>
             <div><input type="checkbox" /><span>1-1</span></div>
             <div><input type="checkbox" /><span>1-2</span></div>
             <div><input type="checkbox" /><span>1-3</span></div>
@@ -27,12 +68,14 @@
         <div>
             <a>-</a>
             <input type="checkbox" />
+            <span>2</span>
             <div><input type="checkbox" /><span>2-1</span></div> 
             <div><input type="checkbox" /><span>2-2</span></div>
         </div>
         <div>
             <a>+</a>
             <input type="checkbox" /> 
+            <span>3</span>
         </div>
     </div>
     <input type="text" id="searchText" value="" />
