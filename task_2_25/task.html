@@ -40,13 +40,20 @@
     		var taga = null;
     		var tagcheck = null;
     		var tagspan = null;
-    			var e = document.createElementNS('<div><a></a><input type="checkbox" '+check==True?"checked":""+' /><span>'+name+'</span></div>');
+    			var e = document.createElementNS('<div show="y"><a></a><input type="checkbox" '+check==True?"checked":""+' /><span>'+name+'</span></div>');
     			curElement.childElement.push(e);
+                e.onclick = function(){
+                    if(this.attr("show") == "y")
+                    {
+                        this.
+                    }else{
+                        this.
+                    }
+                }
     		if(curElement.childElement.length>0)
     		{
-    			//curElement
+    			curElement.childElement[0].innerText = "-";
     		} 
-
     	}
 
     }    
