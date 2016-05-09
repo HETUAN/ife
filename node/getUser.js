@@ -12,7 +12,7 @@ function Start() {
         console.log(html);
         GetData(html, i)
     }
-    fs.writeFile("myfile.txt", users.join(";"), function(err) {
+    fs.writeFile("myfile.txt", users.join(";"), function (err) {
         if (!err)
             console.log("写入成功！")
     })
@@ -33,20 +33,20 @@ function GetData(html, userId) {
 }
 
 // http Request
-var GetPageHtml = function(groupId) { 
-    http.get(reqUrl + groupId, function(res) {
+var GetPageHtml = function (groupId) {
+    http.get(reqUrl + groupId, function (res) {
         var size = 0;
         var chunks = [];
-        res.on('data', function(chunk) {
+        res.on('data', function (chunk) {
             size += chunk.length;
             chunks.push(chunk);
         });
-        res.on('end', function() {
+        res.on('end', function () {
             var data = Buffer.concat(chunks, size);
             return data;
             console.log(data.toString())
         });
-    }).on('error', function(e) {
+    }).on('error', function (e) {
         console.log("Got error: " + e.message);
     });
 }
