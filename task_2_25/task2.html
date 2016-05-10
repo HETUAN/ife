@@ -19,12 +19,12 @@
         
         ul li a {
             width: 100%;
-            border-bottom: 1px solid red;
             color: rgb(87, 100, 119);
         }
         
         ul li a:hover {
-            color: #FFFFFF;
+            color: rgb(42, 46, 31);
+            font-weight: bolder;
             cursor: pointer;
         }
         
@@ -37,7 +37,8 @@
         }
         
         .fontcolor2 {
-            color: #FFFFFF;
+            font-weight: bolder;
+            color: rgb(42, 46, 31);
         }
         
         .opendir1 {
@@ -53,7 +54,9 @@
         }
         
         #leftmenu {
-            background-color: rgb(42, 46, 31);
+            font-family: "微软雅黑";
+            background-color: rgb(230,230,230)
+            /*background-color: rgb(42, 46, 31);*/
         }
     </style>
     <script type="text/javascript">
@@ -124,9 +127,7 @@
 
         window.onload = function() {
             curElement = document.getElementById("leftmenu");
-            addElement("1");
-            addElement("2");
-            addElement("3");
+            addElement("计算机"); 
             console.log(curElement);
             
             // 添加
@@ -155,6 +156,12 @@
                         return;
                     }
                 }
+            }
+            
+            // 回到根目录
+            document.getElementById("backRoot").onclick = function() {
+                ClearBgColor();
+                curElement = document.getElementById("leftmenu");
             }
         }
     </script>
@@ -188,6 +195,8 @@
         </li>
         -->
     </ul>
+    <br />
+    <input type="button" id="backRoot" value="Root">
     <input type="text" id="searchText" value="" />
     <input type="button" id="searchBtn" value="Search" />
     <input type="text" id="addText" value="" />
