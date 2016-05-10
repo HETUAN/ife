@@ -73,6 +73,7 @@
         if (check)
             input.setAttribute("checked", "checked");
         span.innerText = name;
+        div.style.marginLeft = (GetDeepth(curElement))*20+"px";
         div.appendChild(a);
         div.appendChild(input);
         div.appendChild(span);

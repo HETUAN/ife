@@ -1,0 +1,197 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 25</title>
+    <style type="text/css">
+        .menu {
+            width: 200px;
+        }
+        
+        div {
+            border: 1px solid red;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        ul li a {
+            width: 100%;
+            border-bottom: 1px solid red;
+            color: rgb(87, 100, 119);
+        }
+        
+        ul li a:hover {
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+        
+        ul li a i {
+            margin: 2px 5px;
+        }
+        
+        .fontcolor1 {
+            color: rgb(87, 100, 119);
+        }
+        
+        .fontcolor2 {
+            color: #FFFFFF;
+        }
+        
+        .opendir1 {
+            color: #FFFFFF;
+        }
+        
+        .opendir2 {
+            color: rgb(56, 61, 78);
+        }
+        
+        .bgcolor {
+            color: rgb(42, 46, 31);
+        }
+        
+        #leftmenu {
+            background-color: rgb(42, 46, 31);
+        }
+    </style>
+    <script type="text/javascript">
+        /*New Function*/
+        var curElement = document.getElementById("leftmenu");
+        var addElement = function(name) {
+            var tagli = document.createElement('li');
+            var taga = document.createElement('a');
+            var tagi = document.createElement('i');
+            var tagspan = document.createElement('span');
+            var tagul = document.createElement('ul');
+            tagspan.innerHTML = "&nbsp;";
+            tagi.innerText = name;
+            tagul.display = "none";
+            taga.appendChild(tagspan);
+            taga.appendChild(tagi);
+            tagli.appendChild(taga);
+            tagli.appendChild(tagul);
+            curElement.appendChild(tagli);
+            curElement.style.display = "block";
+            taga.onclick = function() {
+                ClearBgColor();
+                this.className += " fontcolor2" 
+                curElement = this.parentElement.getElementsByTagName("ul")[0];
+                //console.log(curElement);
+            }
+            taga.ondblclick = function() {
+                curElement = this.parentElement.getElementsByTagName("ul")[0];
+                console.log(curElement);
+                if(curElement.childElementCount<=0)
+                    return;
+                if(curElement.style.display=="block")
+                {
+                    curElement.style.display = "none";
+                    var pele = curElement.parentElement;
+                    if(pele == document.getElementById("leftmenu"))
+                        return;
+                    var span = pele.firstElementChild.firstElementChild;
+                    span.innerText = "+";
+                }else
+                {
+                    curElement.style.display = "block";
+                        
+                    var pele = curElement.parentElement;
+                    if(pele == document.getElementById("leftmenu"))
+                        return;
+                    var span = pele.firstElementChild.firstElementChild;
+                    span.innerText = "-";
+                }
+            }
+            if (curElement.childElementCount > 0) {
+                var pele = curElement.parentElement;
+                if(pele == document.getElementById("leftmenu")||pele == document.getElementsByTagName("body")[0])
+                    return;
+                var span = pele.firstElementChild.firstElementChild;
+                span.innerText = "-";
+            }
+        }
+
+        function ClearBgColor() {
+            var tags = document.getElementById("leftmenu").getElementsByTagName("a");
+            //console.log(tags);
+            var len = tags.length;
+            for (var idx = 0; idx < len; idx++) {
+                tags[idx].className = tags[idx].className.replace("fontcolor2", "fontcolor1");
+            }
+        }
+
+        window.onload = function() {
+            curElement = document.getElementById("leftmenu");
+            addElement("1");
+            addElement("2");
+            addElement("3");
+            console.log(curElement);
+            
+            // 添加
+            document.getElementById("addBtn").onclick = function() {
+                //
+                var name = document.getElementById("addText").value;
+                document.getElementById("addText").value = "";
+                document.getElementById("addText").focus();
+                addElement(name);
+            }
+            
+            // 查找
+            document.getElementById("searchBtn").onclick = function() {
+                //
+                var name = document.getElementById("searchText").value;
+                document.getElementById("searchText").value = "";
+                document.getElementById("searchText").focus();
+                var list = document.getElementById("leftmenu").getElementsByTagName("li");
+                
+                for(var idx =0; idx<list.length;idx++)
+                { 
+                    var text = list[idx].firstElementChild.lastElementChild.innerText;
+                    if(text == name)
+                    {
+                        list[idx].firstElementChild.click();
+                        return;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="leftmenu" class="menu">
+        <!--
+        <li>
+            <a><span>-</span><i>1</i></a>
+            <ul>
+                <li>
+                    <a><i>1-1</i></a>
+                </li>
+                <li>
+                    <a><i>1-2</i></a>
+                </li>
+                <li>
+                    <a><i>1-3</i></a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a><span>+</span><i>2</i></a>
+        </li>
+        <li>
+            <a><span>+</span><i>3</i></a>
+        </li>
+        <li>
+            <a><span>+</span><i>4</i></a>
+        </li>
+        -->
+    </ul>
+    <input type="text" id="searchText" value="" />
+    <input type="button" id="searchBtn" value="Search" />
+    <input type="text" id="addText" value="" />
+    <input type="button" id="addBtn" value="Add" />
+</body>
+
+</html></html>
