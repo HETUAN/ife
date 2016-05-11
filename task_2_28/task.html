@@ -57,24 +57,132 @@
             background-color: gray;
             border: 1px solid black;
         }
-        a:hover{
+        
+        a:hover {
             cursor: pointer;
         }
     </style>
     <script type="text/javascript">
-        window.onload = function() {
-            //
-            var number = 0;
-            var radios = document.getElementsByClassName("radio");
-            console.log(radios);
-            for (var idx = 0; idx < radios.length; idx++) {
-                //
-                radios[idx].onclick = function(e) {
-                    console.log(e);
-                    e.target.firstElementChild.checked = "checked";
+        /* 
+    var powerType = [{id:1,name:"前进号"},{id:2,name:"奔腾号"},{id:3,name:"超越号"}];
+    var energyType = [{id:1,name:"劲量型"},{id:2,name:"光能型"},{id:3,name:"永久型"}];
+    
+    var power = function(){
+        this.powerType = [{id:1,name:"前进号",speed:30,consume:5},{id:2,name:"奔腾号",speed:50,consume:7},{id:3,name:"超越号",speed:80,consume:9}];
+        this.GetType = function(id){
+            for(var i = 0 ; i<this.powerType.length;i++)
+            {
+                if(this.powerType[i].id == id)
+                {
+                    return this.powerType[i];
                 }
             }
+            return null;
         }
+    }
+    
+    var energy = function(){
+        this.energyType = [{id:1,name:"劲量型",recover:2},{id:2,name:"光能型",recover:3},{id:3,name:"永久型",recover:4}];
+        this.GetType = function(id){
+            for(var i = 0 ; i<this.energyType.length;i++)
+            {
+                if(this.energyType[i].id == id)
+                {
+                    return this.energyType[i];
+                }
+            }
+            return null;
+        }
+    }
+    */
+    
+    //在包含 radio 标签的 a 标签上绑定点击事件
+    var BindAToSelectRadio = function(){
+        var radios = document.getElementsByClassName("radio");
+        console.log(radios);
+        for (var idx = 0; idx < radios.length; idx++) {
+            radios[idx].onclick = function(e) {
+                e.target.firstElementChild.checked = "checked";
+            }
+        }
+    }
+    
+    var energy = {
+        energyType : [{id:1,name:"劲量型",recover:2},{id:2,name:"光能型",recover:3},{id:3,name:"永久型",recover:4}],
+        GetType:function(id){
+            for(var i = 0 ; i<this.energyType.length;i++)
+            {
+                if(this.energyType[i].id == id)
+                {
+                    return this.energyType[i];
+                }
+            }
+            return null;
+        }
+    }
+    
+    var power = {
+        powerType : [{id:1,name:"前进号",speed:30,consume:5},{id:2,name:"奔腾号",speed:50,consume:7},{id:3,name:"超越号",speed:80,consume:9}],
+        GetType : function(id){
+            for(var i = 0 ; i<this.powerType.length;i++)
+            {
+                if(this.powerType[i].id == id)
+                {
+                    return this.powerType[i];
+                }
+            }
+            return null;
+        }
+    }
+    
+    var energy = function(){
+        this.id = 0;
+        this.name = "";
+        this.recover = 0;
+    }
+    
+    var power = function(){
+        this.id = 0;
+        this.name = "";
+        this.speed = 0;
+        this.comsume = 0;
+    }
+    
+    var spaceShip = function(){
+        this.id = 0;
+        this.name = "";
+        this.curenergy = 100;
+        this.energy;
+        this.power;
+        // 运行状态 false 停止 true 运行
+        this.state = false;
+        
+        // 前进
+        this.run = function(){
+            //
+        }
+        
+        // 停止
+        this.stop = function(){
+            //
+        }
+        
+        this.destory = function(){
+            delete this;
+        }
+        
+        // 渲染位置和文字以及其他样式
+        this.render = function(){
+            //
+        }
+    }
+    
+    window.onload = function() {
+        //
+        spaceships = [];
+        BindAToSelectRadio(); 
+        console.log(powerObj.GetType(1));
+    }
     </script>
 </head>
 
@@ -143,9 +251,3 @@
 </body>
 
 </html>
-
-</html>
-
-</html>
-
-</html></html></html></html>
