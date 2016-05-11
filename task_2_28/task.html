@@ -1,0 +1,151 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 28</title>
+    <style type="text/css">
+        .row1 {
+            width: 1400px;
+            height: 600px;
+            border: 0px solid black;
+        }
+        
+        .row2 {
+            border: 1px solid black;
+            width: 1400px;
+            height: 100px;
+            margin-top: 4px;
+        }
+        
+        .row3 {
+            border: 1px solid black;
+            width: 1400px;
+            height: 100px;
+            margin-top: 2px;
+        }
+        
+        .space {
+            border: 1px solid blue;
+            width: 800px;
+            height: 600px;
+            float: left;
+            background-color: black;
+        }
+        
+        .stateboard {
+            border: 1px solid red;
+            width: 596px;
+            height: 600px;
+            float: right;
+            margin-left: 0px;
+        }
+        
+        .stateboard table {
+            text-align: center;
+            width: 100%;
+            border-collapse: collapse;
+            /*设置表格的边框被合并为一个单一的边框*/
+        }
+        
+        .stateboard table tbody tr td {
+            border: 1px;
+            border: 1px solid black;
+        }
+        
+        .stateboard table tr th {
+            background-color: gray;
+            border: 1px solid black;
+        }
+        a:hover{
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            //
+            var number = 0;
+            var radios = document.getElementsByClassName("radio");
+            console.log(radios);
+            for (var idx = 0; idx < radios.length; idx++) {
+                //
+                radios[idx].onclick = function(e) {
+                    console.log(e);
+                    e.target.firstElementChild.checked = "checked";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="row1">
+        <div class="space"></div>
+        <div class="stateboard">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>飞船</th>
+                        <th>动力系统</th>
+                        <th>能源系统</th>
+                        <th>飞行状态</th>
+                        <th>剩余能耗</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row2">
+        <div>
+            <i>动力系统选择：</i>
+            <a class="radio"><input type="radio" name="power" id="power1" checked="checked" value="1" />前进号（速度30px/s，能耗5%/s）</a>
+            <a class="radio"><input type="radio" name="power" id="power2" value="2" />奔腾号（速度50px/s，能耗7%/s） </a>
+            <a class="radio"><input type="radio" name="power" id="power3" value="3" />超越号（速度80px/s，能耗9%/s） </a>
+        </div>
+        <div>
+            <i>能源系统选择：</i>
+            <a class="radio"><input type="radio" name="energy" id="energy1" checked="checked" value="1" />劲量型（补充能源速度2%/s）</a>
+            <a class="radio"><input type="radio" name="energy" id="energy2" value="2" />光能型（补充能源速度3%/s）</a>
+            <a class="radio"><input type="radio" name="energy" id="energy2" value="2" />永久型（补充能源速度4%/s）</a>
+        </div>
+        <div>
+            <input type="button" value="创建新飞船" />
+        </div>
+    </div>
+    <div class="row3">
+        <div>
+            <i>对1号飞船下达指令</i>
+            <input type="button" value="开始飞行" />
+            <input type="button" value="停止飞行" />
+            <input type="button" value="销毁" />
+        </div>
+        <div>
+            <i>对2号飞船下达指令</i>
+            <input type="button" value="开始飞行" />
+            <input type="button" value="停止飞行" />
+            <input type="button" value="销毁" />
+        </div>
+    </div>
+</body>
+
+</html>
+
+</html>
+
+</html>
+
+</html></html></html></html>
