@@ -6,31 +6,32 @@
     <title>IFE JavaScript Task 28</title>
     <style type="text/css">
         .row1 {
-            width: 1400px;
+            width: 1200px;
             height: 600px;
             border: 0px solid black;
         }
         
         .row2 {
             border: 1px solid black;
-            width: 1400px;
+            width: 1200px;
             height: 100px;
             margin-top: 4px;
         }
         
         .row3 {
             border: 1px solid black;
-            width: 1400px;
+            width: 1200px;
             height: 100px;
             margin-top: 2px;
         }
         
         .space {
             border: 1px solid blue;
-            width: 800px;
+            width: 600px;
             height: 600px;
             float: left;
             background-color: black;
+            position: relative;
         }
         
         .stateboard {
@@ -60,6 +61,74 @@
         
         a:hover {
             cursor: pointer;
+        }
+        .planet{
+            position: absolute;
+            margin-left:250px; 
+            margin-top:250px;
+            margin-bottom:400px;
+            background-color: orange;
+            height: 100px;
+            width: 100px;
+            border-radius:50px; 
+        }
+        
+        .circle1{
+            position: absolute;
+            margin-left:200px;
+            margin-top:200px; 
+            border: 2px solid orange;
+            height: 200px;
+            width: 200px;
+            border-radius:100px; 
+        }
+        
+        .circle2{
+            position: absolute;
+            margin-left:150px; 
+            margin-top:150px; 
+            border: 2px solid orange;
+            height: 300px;
+            width: 300px;
+            border-radius:150px; 
+        }
+        
+        .circle3{
+            position: absolute;
+            margin-left:100px; 
+            margin-top:100px; 
+            border: 2px solid orange;
+            height: 400px;
+            width: 400px;
+            border-radius:200px; 
+        }
+        
+        .circle4{
+            position: absolute;
+            margin-left:50px; 
+            margin-top:50px; 
+            border: 2px solid orange;
+            height: 500px;
+            width: 500px;
+            border-radius:250px; 
+        }
+        
+        .spaceship{
+            width:60px;
+            height:30px;
+            background-color: ghostwhite;
+            border: 1px solid white;
+            border-radius: 15px;
+            position: absolute;
+            
+            top:35px;
+            left:270px;
+            transform: rotate(0deg);
+            /*
+            top:285px;
+            left:20px;
+            transform: rotate(90deg);
+            */
         }
     </style>
     <script type="text/javascript">
@@ -269,7 +338,14 @@
 
 <body>
     <div class="row1">
-        <div class="space"></div>
+        <div class="space">
+            <div class="planet"></div>
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+            <div class="spaceship"></div>
+        </div>
         <div class="stateboard">
             <table>
                 <tbody>
@@ -332,5 +408,3 @@
 </body>
 
 </html>
-
-</html></html></html>
