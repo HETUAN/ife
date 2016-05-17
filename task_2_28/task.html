@@ -289,7 +289,19 @@
             this.speed = 0;
             this.comsume = 0;
         }
+        
+        // 行星接受器（接受飞船的反馈信息）
+        var Adapter = function(){
+        	//
+        }
 
+        // 广播接受行星的消息并处理后广播到宇宙中
+        var Mediator = function(){
+        	//
+
+        }
+        
+        // 飞船类
         var spaceShip = function() {
             this.id = 0;
             this.name = "";
@@ -298,6 +310,16 @@
             this.power;
             // 运行状态 false 停止 true 运行
             this.state = false;
+            
+            // 广播消息
+            this.RadioMsg = function(bmsg){
+            	//
+            }
+
+            // 接收消息
+            this.ReceiveMag = function(){
+            	//
+            }
 
             // 前进
             this.run = function() {
