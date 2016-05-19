@@ -62,67 +62,67 @@
         a:hover {
             cursor: pointer;
         }
-        .planet{
+        
+        .planet {
             position: absolute;
-            margin-left:250px; 
-            margin-top:250px;
-            margin-bottom:400px;
+            margin-left: 250px;
+            margin-top: 250px;
+            margin-bottom: 400px;
             background-color: orange;
             height: 100px;
             width: 100px;
-            border-radius:50px; 
+            border-radius: 50px;
         }
         
-        .circle1{
+        .circle1 {
             position: absolute;
-            margin-left:200px;
-            margin-top:200px; 
+            margin-left: 200px;
+            margin-top: 200px;
             border: 2px solid orange;
             height: 200px;
             width: 200px;
-            border-radius:100px; 
+            border-radius: 100px;
         }
         
-        .circle2{
+        .circle2 {
             position: absolute;
-            margin-left:150px; 
-            margin-top:150px; 
+            margin-left: 150px;
+            margin-top: 150px;
             border: 2px solid orange;
             height: 300px;
             width: 300px;
-            border-radius:150px; 
+            border-radius: 150px;
         }
         
-        .circle3{
+        .circle3 {
             position: absolute;
-            margin-left:100px; 
-            margin-top:100px; 
+            margin-left: 100px;
+            margin-top: 100px;
             border: 2px solid orange;
             height: 400px;
             width: 400px;
-            border-radius:200px; 
+            border-radius: 200px;
         }
         
-        .circle4{
+        .circle4 {
             position: absolute;
-            margin-left:50px; 
-            margin-top:50px; 
+            margin-left: 50px;
+            margin-top: 50px;
             border: 2px solid orange;
             height: 500px;
             width: 500px;
-            border-radius:250px; 
+            border-radius: 250px;
         }
         
-        .spaceship{
-            width:60px;
-            height:30px;
+        .spaceship {
+            width: 60px;
+            height: 30px;
             background-color: ghostwhite;
             border: 1px solid white;
             border-radius: 15px;
             position: absolute;
-            
-            top:35px;
-            left:270px;
+            top: 35px;
+            left: 270px;
             transform: rotate(0deg);
             /*
             top:285px;
@@ -133,234 +133,95 @@
     </style>
     <script type="text/javascript">
         /*
-        var powerType = [{
-            id: 1,
-            name: "前进号"
-        }, {
-            id: 2,
-            name: "奔腾号"
-        }, {
-            id: 3,
-            name: "超越号"
-        }];
-        var energyType = [{
-            id: 1,
-            name: "劲量型"
-        }, {
-            id: 2,
-            name: "光能型"
-        }, {
-            id: 3,
-            name: "永久型"
-        }];
+                var powerType = [{
+                    id: 1,
+                    name: "前进号"
+                }, {
+                    id: 2,
+                    name: "奔腾号"
+                }, {
+                    id: 3,
+                    name: "超越号"
+                }];
+                var energyType = [{
+                    id: 1,
+                    name: "劲量型"
+                }, {
+                    id: 2,
+                    name: "光能型"
+                }, {
+                    id: 3,
+                    name: "永久型"
+                }];
 
-        // 静态类
-        var power = function() {
-            var name = ""; // 私有属性
-            this.id = 0; // 共有属性
-        }
-        // 定义静态变量
-        power.powerType = [{
-            id: 1,
-            name: "前进号",
-            speed: 30,
-            consume: 5
-        }, {
-            id: 2,
-            name: "奔腾号",
-            speed: 50,
-            consume: 7
-        }, {
-            id: 3,
-            name: "超越号",
-            speed: 80,
-            consume: 9
-        }];
-
-        // 定义静态方法
-        power.GetType = function(id) {
-            for (var i = 0; i < this.powerType.length; i++) {
-                if (this.powerType[i].id == id) {
-                    return this.powerType[i];
+                // 静态类
+                var power = function() {
+                    var name = ""; // 私有属性
+                    this.id = 0; // 共有属性
                 }
-            }
-            return null;
-        }
+                // 定义静态变量
+                power.powerType = [{
+                    id: 1,
+                    name: "前进号",
+                    speed: 30,
+                    consume: 5
+                }, {
+                    id: 2,
+                    name: "奔腾号",
+                    speed: 50,
+                    consume: 7
+                }, {
+                    id: 3,
+                    name: "超越号",
+                    speed: 80,
+                    consume: 9
+                }];
 
-        var energy = function() {
-            // 实例变量
-            this.energyType = [{
-                id: 1,
-                name: "劲量型",
-                recover: 2
-            }, {
-                id: 2,
-                name: "光能型",
-                recover: 3
-            }, {
-                id: 3,
-                name: "永久型",
-                recover: 4
-            }];
-            // 实例方法
-            this.GetType = function(id) {
-                for (var i = 0; i < this.energyType.length; i++) {
-                    if (this.energyType[i].id == id) {
-                        return this.energyType[i];
+                // 定义静态方法
+                power.GetType = function(id) {
+                    for (var i = 0; i < this.powerType.length; i++) {
+                        if (this.powerType[i].id == id) {
+                            return this.powerType[i];
+                        }
+                    }
+                    return null;
+                }
+
+                var energy = function() {
+                    // 实例变量
+                    this.energyType = [{
+                        id: 1,
+                        name: "劲量型",
+                        recover: 2
+                    }, {
+                        id: 2,
+                        name: "光能型",
+                        recover: 3
+                    }, {
+                        id: 3,
+                        name: "永久型",
+                        recover: 4
+                    }];
+                    // 实例方法
+                    this.GetType = function(id) {
+                        for (var i = 0; i < this.energyType.length; i++) {
+                            if (this.energyType[i].id == id) {
+                                return this.energyType[i];
+                            }
+                        }
+                        return null;
                     }
                 }
-                return null;
-            }
-        }
-        */
-        // 静态对象
-        var energy = {
-            energyType: [{
-                id: 1,
-                name: "劲量型",
-                recover: 2
-            }, {
-                id: 2,
-                name: "光能型",
-                recover: 3
-            }, {
-                id: 3,
-                name: "永久型",
-                recover: 4
-            }],
-            GetType: function(id) {
-                for (var i = 0; i < this.energyType.length; i++) {
-                    if (this.energyType[i].id == id) {
-                        return this.energyType[i];
-                    }
-                }
-                return null;
-            }
-        }
-
-        // 静态对象
-        var power = {
-            powerType: [{
-                id: 1,
-                name: "前进号",
-                speed: 30,
-                consume: 5
-            }, {
-                id: 2,
-                name: "奔腾号",
-                speed: 50,
-                consume: 7
-            }, {
-                id: 3,
-                name: "超越号",
-                speed: 80,
-                consume: 9
-            }],
-            GetType: function(id) {
-                for (var i = 0; i < this.powerType.length; i++) {
-                    if (this.powerType[i].id == id) {
-                        return this.powerType[i];
-                    }
-                }
-                return null;
-            }
-        }
-
-        //在包含 radio 标签的 a 标签上绑定点击事件
-        var BindAToSelectRadio = function() {
-            var radios = document.getElementsByClassName("radio");
-            console.log(radios);
-            for (var idx = 0; idx < radios.length; idx++) {
-                radios[idx].onclick = function(e) {
-                    e.target.firstElementChild.checked = "checked";
-                }
-            }
-        }
-
-        var energyModel = function() {
-            this.id = 0;
-            this.name = "";
-            this.recover = 0;
-        }
-
-        var powerModel = function() {
-            this.id = 0;
-            this.name = "";
-            this.speed = 0;
-            this.comsume = 0;
-        }
+                */
+        console.log("hello")
         
-        // 行星接受器（接受飞船的反馈信息）
-        var Adapter = function(){
-        	//
-        }
-
-        // 广播接受行星的消息并处理后广播到宇宙中
-        var Mediator = function(){
-        	//
-
-        }
-        
-        // 飞船类
-        var spaceShip = function() {
-            this.id = 0;
-            this.name = "";
-            this.curenergy = 100;
-            this.energy;
-            this.power;
-            // 运行状态 false 停止 true 运行
-            this.state = false;
-            
-            // 广播消息
-            this.RadioMsg = function(bmsg){
-            	//
-            }
-
-            // 接收消息
-            this.ReceiveMag = function(){
-            	//
-            }
-
-            // 前进
-            this.run = function() {
-                //
-            }
-
-            // 停止
-            this.stop = function() {
-                //
-            }
-            
-            // 销毁
-            this.destory = function() {
-                delete this;
-            }
-
-            // 渲染位置和文字以及其他样式
-            this.render = function() {
-                //
-            }
-        }
-        
-        // 飞船工厂
-        var shipFactory = {
-            count:0,
-            curId:0,
-            createShip:function(){},
-        }
-        
-        window.onload = function() {
-            //
-            spaceships = [];
-            BindAToSelectRadio();
-            console.log(power.GetType(1));
-        }
     </script>
+    <script type="text/javascript" src="task.js"></script>
 </head>
 
 <body>
     <div class="row1">
-        <div class="space">
+        <div class="space" id="tagspace">
             <div class="planet"></div>
             <div class="circle1"></div>
             <div class="circle2"></div>
@@ -429,4 +290,4 @@
     </div>
 </body>
 
-</html>
+</html></html>
