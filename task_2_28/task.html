@@ -115,8 +115,8 @@
         }
         
         .spaceship {
-            width: 60px;
-            height: 30px;
+            width: 80px;
+            height: 20px;
             background-color: ghostwhite;
             border: 1px solid white;
             border-radius: 15px;
@@ -124,98 +124,16 @@
             top: 35px;
             left: 270px;
             transform: rotate(0deg);
+            font-size: 6px;
+            line-height: 20px;
+            text-align: center;
             /*
             top:285px;
             left:20px;
             transform: rotate(90deg);
             */
         }
-    </style>
-    <script type="text/javascript">
-        /*
-                var powerType = [{
-                    id: 1,
-                    name: "前进号"
-                }, {
-                    id: 2,
-                    name: "奔腾号"
-                }, {
-                    id: 3,
-                    name: "超越号"
-                }];
-                var energyType = [{
-                    id: 1,
-                    name: "劲量型"
-                }, {
-                    id: 2,
-                    name: "光能型"
-                }, {
-                    id: 3,
-                    name: "永久型"
-                }];
-
-                // 静态类
-                var power = function() {
-                    var name = ""; // 私有属性
-                    this.id = 0; // 共有属性
-                }
-                // 定义静态变量
-                power.powerType = [{
-                    id: 1,
-                    name: "前进号",
-                    speed: 30,
-                    consume: 5
-                }, {
-                    id: 2,
-                    name: "奔腾号",
-                    speed: 50,
-                    consume: 7
-                }, {
-                    id: 3,
-                    name: "超越号",
-                    speed: 80,
-                    consume: 9
-                }];
-
-                // 定义静态方法
-                power.GetType = function(id) {
-                    for (var i = 0; i < this.powerType.length; i++) {
-                        if (this.powerType[i].id == id) {
-                            return this.powerType[i];
-                        }
-                    }
-                    return null;
-                }
-
-                var energy = function() {
-                    // 实例变量
-                    this.energyType = [{
-                        id: 1,
-                        name: "劲量型",
-                        recover: 2
-                    }, {
-                        id: 2,
-                        name: "光能型",
-                        recover: 3
-                    }, {
-                        id: 3,
-                        name: "永久型",
-                        recover: 4
-                    }];
-                    // 实例方法
-                    this.GetType = function(id) {
-                        for (var i = 0; i < this.energyType.length; i++) {
-                            if (this.energyType[i].id == id) {
-                                return this.energyType[i];
-                            }
-                        }
-                        return null;
-                    }
-                }
-                */
-        console.log("hello")
-        
-    </script>
+    </style>  
     <script type="text/javascript" src="task.js"></script>
 </head>
 
@@ -227,7 +145,7 @@
             <div class="circle2"></div>
             <div class="circle3"></div>
             <div class="circle4"></div>
-            <div class="spaceship"></div>
+            <!--<div class="spaceship"></div>-->
         </div>
         <div class="stateboard">
             <table>
@@ -290,4 +208,5 @@
     </div>
 </body>
 
-</html></html>
+</html> 
+

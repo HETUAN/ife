@@ -93,10 +93,16 @@ var centerPoint = {
     // 传入半径和弧长（速度）计算每秒的横纵运行距离
     calaulate: function (r, l, sec) {
         // 角度
-        var angle = l * sec * 180 / Math.PI / r;
-        var h = r * Math.sin(angle / 2) * 2 * Math.sin(angle / 2);
-        var v = r * Math.sin(angle / 2) * 2 * Math.cos(angle / 2);
-        return { h: this.top - 300 + h, v: this.left - v, ang: angle };
+        // var angle = l * sec * 180 / Math.PI / r;
+        // var h = r * Math.sin(angle / 2) * 2 * Math.sin(angle / 2);
+        // var v = r * Math.sin(angle / 2) * 2 * Math.cos(angle / 2);
+        // return { h: this.top - 300 + h, v: this.left - v, ang: angle };
+        var angle = Math.PI / 2 - l * sec / r / 2; // 顶角弧度
+        var chord = r * Math.cos(angle) * 2; // 弦
+        var v = chord * Math.sin(angle);
+        var h = chord * Math.cos(angle);
+        var tangle = 90 - 180 * angle / Math.PI;
+        return { h: this.top - r - 10 + h, v: this.left - 40 - v, ang: -tangle*2 };
     }
 }
 
@@ -109,7 +115,7 @@ var spaceShip = {
         spaceship.curenergy = 100;  // 当前能量
         spaceship.energy;    // 能量系统
         spaceship.power;    // 动力系统
-        spaceship.track = 200; // 轨道
+        spaceship.track = 250; // 轨道
 
         // 运行状态 false 停止 true 运行
         spaceship.state = false;
@@ -151,7 +157,10 @@ var spaceShip = {
                 spaceship.curenergy += spaceship.energy.recover;
 
             if (!spaceship.state)  // 是否处于飞行状态
+            {
+                spaceship.render();
                 return;
+            }
             if (spaceship.power.consume <= spaceship.curenergy) {
                 spaceship.curenergy -= spaceship.power.consume;  // 消耗能量
                 spaceship.second++;    // 飞行时间
@@ -185,7 +194,19 @@ var spaceShip = {
             spaceship.tag.style.top = spaceship.top;
             spaceship.tag.style.left = spaceship.left;
             spaceship.tag.style.transform = 'rotate(' + spaceship.rotate + 'deg)';
-            spaceship.tag.innerText = spaceship.name;
+
+            // spaceship.tag.style.msTransform = 'rotate(' + spaceship.rotate + 'deg)';
+            // spaceship.tag.style.webkitTransform = 'rotate(' + spaceship.rotate + 'deg)';
+            spaceship.tag.style.webkitTransform = "rotate(" + spaceship.rotate + "deg)";
+            spaceship.tag.style.msTransform = "rotate(" + spaceship.rotate + "deg)";
+            spaceship.tag.style.MozTransform = "rotate(" + spaceship.rotate + "deg)";
+            spaceship.tag.style.OTransform = "rotate(" + spaceship.rotate + "deg)";
+            spaceship.tag.style.transform = "rotate(" + spaceship.rotate + "deg)";
+            //var s1 = ' -ms-transform : rotate(' + spaceship.rotate + 'deg);'; /* IE 9 */
+            //s1 += ' -webkit-transform : rotate(' + spaceship.rotate + 'deg);'; /* Safari and Chrome */
+            //var s2 = spaceship.tag.style.cssText;
+            //spaceship.tag.style.cssText = (s2+s1);
+            spaceship.tag.innerText = spaceship.name + "(" + spaceship.curenergy + ")";
         }
         return spaceship;
     }
@@ -201,7 +222,7 @@ var shipFactory = {
 window.onload = function () {
     //
     //spaceships = [];
-    //BindAToSelectRadio();
+    BindAToSelectRadio();  // 绑定按钮
     //console.log(power.GetType(1));
 
     s1 = new spaceShip.createNew();
@@ -209,6 +230,9 @@ window.onload = function () {
     s1.name = '三体号';
     s1.power = power.GetType(2); // 动力系统
     s1.energy = energy.GetType(2);    // 能量系统
-    s1.track = 200; // 轨道
+    s1.track = 250; // 轨道
+    s1.top = 40;
+    s1.left = 260;
     s1.Create();
+    s1.render();
 }
