@@ -76,8 +76,43 @@ var powerModel = function () {
 }
 
 // 行星接受器（接受飞船的反馈信息）
-var Adapter = function () {
-    //
+var Adapter = {
+    createNew: function () {
+        var adapter = {};
+        adapter.Encode = function (ship) {
+            var code = "";
+            code += parseInt(ship.id, 2).toString();
+            if (ship.state == "停止") {
+                code += "0010";
+            }
+            else if (ship.state == "飞行") {
+                code += "0001";
+            }
+            else {
+                code += "1100";
+            }
+            var e = parseInt(ship.energy, 2);
+            if (e.toString().length < 8) {
+                code += (100000000 + e).toString().substr(1, 8);
+            }
+            return code;
+        };
+        adapter.Decode = function (code) {
+            var ship = {};
+            ship.id = parseInt(code.substr(0, 4), 10);
+            var s = code.substr(0, 4);
+            if (s == "0010") {
+                ship.state = "停止";
+            } else if (s == "0001") {
+                ship.state = "飞行";
+            } else {
+                ship.state = "销毁";
+            }
+            ship.energy = parseInt(code.substr(8, 8), 10);
+            return ship;
+        } 
+    }
+
 }
 
 // 广播接受行星的消息并处理后广播到宇宙中
@@ -102,7 +137,7 @@ var centerPoint = {
         var v = chord * Math.sin(angle);
         var h = chord * Math.cos(angle);
         var tangle = 90 - 180 * angle / Math.PI;
-        return { h: this.top - r - 10 + h, v: this.left - 40 - v, ang: -tangle*2 };
+        return { h: this.top - r - 10 + h, v: this.left - 40 - v, ang: -tangle * 2 };
     }
 }
 
@@ -230,8 +265,8 @@ window.onload = function () {
     s1.name = '三体号';
     s1.power = power.GetType(2); // 动力系统
     s1.energy = energy.GetType(2);    // 能量系统
-    s1.track = 250; // 轨道
-    s1.top = 40;
+    s1.track = 200; // 轨道
+    s1.top = (300 - s1.track - 10)
     s1.left = 260;
     s1.Create();
     s1.render();
