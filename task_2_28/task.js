@@ -1,4 +1,4 @@
-// 静态对象
+// 静态对象 能源系统模型
 var energy = {
     energyType: [{
         id: 1,
@@ -23,7 +23,7 @@ var energy = {
     }
 }
 
-// 静态对象
+// 静态对象 飞行系统模型
 var power = {
     powerType: [{
         id: 1,
@@ -51,16 +51,6 @@ var power = {
     }
 }
 
-//在包含 radio 标签的 a 标签上绑定点击事件
-var BindAToSelectRadio = function () {
-    var radios = document.getElementsByClassName("radio");
-    console.log(radios);
-    for (var idx = 0; idx < radios.length; idx++) {
-        radios[idx].onclick = function (e) {
-            e.target.firstElementChild.checked = "checked";
-        }
-    }
-}
 
 var energyModel = function () {
     this.id = 0;
@@ -110,14 +100,8 @@ var Adapter = {
             }
             ship.energy = parseInt(code.substr(8, 8), 10);
             return ship;
-        } 
+        }
     }
-
-}
-
-// 广播接受行星的消息并处理后广播到宇宙中
-var Mediator = function () {
-    //
 
 }
 
@@ -141,6 +125,11 @@ var centerPoint = {
     }
 }
 
+// 行星信号广播器 广播接受行星的消息并处理后广播到宇宙中
+var Mediator = {
+    // 
+}
+
 // 飞船类
 var spaceShip = {
     createNew: function () {
@@ -162,6 +151,8 @@ var spaceShip = {
         // 创建飞船标签并且初始化属性样式
         spaceship.tag;
 
+        spaceship.adapter;
+
         // 广播消息
         spaceship.RadioMsg = function (bmsg) {
             //
@@ -175,11 +166,13 @@ var spaceShip = {
             spaceship.ptag = document.getElementById("tagspace");
             spaceship.tag = document.createElement("div");
             spaceship.tag.setAttribute("class", "spaceship")
+            spaceship.tag.id = "ship" + spaceship.id;
             spaceship.tag.style.top = "35px";
             spaceship.tag.style.left = "270px";
             spaceship.ptag.appendChild(spaceship.tag);
             setInterval(spaceship.run, 1000);
         }
+        // 前进的主方法
         spaceship.start = function () {
             spaceship.state = true;
         }
@@ -220,6 +213,11 @@ var spaceShip = {
 
         // 销毁
         spaceship.destory = function () {
+            var parent = document.getElementById("tagspace");
+            var child = document.getElementById(spaceship.tag.id);
+            parent.removeChild(child);
+            // var tag = document.getElementById(spaceship.tag.id);
+            // document.body.removeChild(tag);
             delete spaceship;
         }
 
@@ -251,7 +249,107 @@ var spaceShip = {
 var shipFactory = {
     count: 0,
     curId: 0,
-    createShip: function () { },
+    // id，名称，动力系统，能量系统，轨道
+    createShip: function (id, name, pow, eng, trk) {
+        //
+        var s1 = new spaceShip.createNew();
+        s1.id = id;
+        s1.name = (name == "" || name == null) ? (id + '号') : name;
+        s1.power = power.GetType(pow); // 动力系统
+        s1.energy = energy.GetType(eng);    // 能量系统
+        s1.track = trk; // 轨道
+        s1.top = (300 - s1.track - 10)
+        s1.left = 260;
+        s1.Create();
+        s1.render();
+        return s1;
+    },
+}
+
+//在包含 radio 标签的 a 标签上绑定点击事件
+var BindAToSelectRadio = function () {
+    var radios = document.getElementsByClassName("radio");
+    console.log(radios);
+    for (var idx = 0; idx < radios.length; idx++) {
+        radios[idx].onclick = function (e) {
+            e.target.firstElementChild.checked = "checked";
+        }
+    }
+}
+
+// 行星对象
+var Planet = {
+    // 
+    ships: [],
+    getShipById: function (id) {
+        for (var i = 0; i < this.ships.length; i++) {
+            if (this.ships[i] != undefined && this.ships[i] != null && this.ships[i].id == id) {
+                return this.ships[i];
+            }
+        }
+        return null;
+    },
+    shipDestory: function (id) {
+        //
+        var idx = -1;
+        for (var i = 0; i < this.ships.length; i++) {
+            if (this.ships[i] != undefined && this.ships[i] != null && this.ships[i].id == id) {
+                idx = i;
+            }
+        }
+        if (idx == -1) {
+            console.log("没有要销毁的飞船" + id);
+            //
+        } else {
+            //
+            this.ships[idx].destory(); 
+            this.ships[idx] = null;
+            delete this.ships[idx];
+            console.log("成功销毁飞船" + id);
+        }
+    },
+    shipEvent: function (id, type) {
+        //
+        var ship = this.getShipById(id);
+        if (type == "create") {
+            //
+            if (ship != null) {
+                console.log("飞船已经存在！");
+                return;
+            }
+            var pow = 1;
+            var eng = 1;
+            if (id == 2) {
+                pow = 2;
+                eng = 2;
+            } else if (id == 3) {
+                pow = 2;
+                eng = 3;
+            } else if (id == 4) {
+                pow = 3;
+                eng = 3;
+            }
+            var trk = 50 * (id+1);
+            this.ships.push(shipFactory.createShip(id, "", pow, eng, trk));
+            console.log(this.ships);
+            return;
+        }
+
+        if (id == null || ship == null) {
+            console.log("没有此飞船！" + id);
+            return;
+        }
+        if (type == "start") {
+            //
+            ship.start();
+        } else if (type == "stop") {
+            //
+            ship.stop();
+        } else if (type == "destory") {
+            //
+            this.shipDestory(id); 
+        }
+    }
 }
 
 window.onload = function () {
@@ -259,15 +357,16 @@ window.onload = function () {
     //spaceships = [];
     BindAToSelectRadio();  // 绑定按钮
     //console.log(power.GetType(1));
-
-    s1 = new spaceShip.createNew();
-    s1.id = 1;
-    s1.name = '三体号';
-    s1.power = power.GetType(2); // 动力系统
-    s1.energy = energy.GetType(2);    // 能量系统
-    s1.track = 200; // 轨道
-    s1.top = (300 - s1.track - 10)
-    s1.left = 260;
-    s1.Create();
-    s1.render();
+    /* 
+        s1 = new spaceShip.createNew();
+        s1.id = 1;
+        s1.name = '三体号';
+        s1.power = power.GetType(2); // 动力系统
+        s1.energy = energy.GetType(2);    // 能量系统
+        s1.track = 200; // 轨道
+        s1.top = (300 - s1.track - 10)
+        s1.left = 260;
+        s1.Create();
+        s1.render();
+        */
 }
