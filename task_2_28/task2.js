@@ -71,13 +71,7 @@ var Adapter = {
         var adapter = {};
         adapter.Encode = function (ship) {
             var code = "";
-            var bid = parseInt(ship.id, 2);
-            if (bid.toString().length <= 4) {
-                //console.log((10000 + bid).toString());
-                code += (10000 + bid).toString().substr(1, 4);
-            } else {
-                code += bid.toString().substr(1, 4);
-            }
+            code += parseInt(ship.id, 2).toString();
             if (ship.state == "停止") {
                 code += "0010";
             }
@@ -90,13 +84,13 @@ var Adapter = {
             var e = parseInt(ship.energy, 2);
             if (e.toString().length < 8) {
                 code += (100000000 + e).toString().substr(1, 8);
-            } else { code += "00000000" }
+            }
             return code;
         };
         adapter.Decode = function (code) {
             var ship = {};
             ship.id = parseInt(code.substr(0, 4), 10);
-            var s = code.substr(4, 4);
+            var s = code.substr(0, 4);
             if (s == "0010") {
                 ship.state = "停止";
             } else if (s == "0001") {
@@ -114,7 +108,7 @@ var Adapter = {
             else
                 return false;
         }
-        return adapter;
+
     }
 
 }
@@ -154,18 +148,17 @@ var Mediator = {
     // 处理消息队列
     DealMsgQueue: function () {
         //
-        console.log("DealMsgQueue");
         this.ErrorNum = 0;
         if (this.MsgQueue.length > 0)
             this.RadioMsg(this.MsgQueue[0]);
         else
-            setTimeout("Mediator.DealMsgQueue()", 1000);
+            setTimeout(this.DealMsgQueue(), 1000);
     },
     // 广播消息
     RadioMsg: function (msg) {
         // 模拟丢包
         msg = this.SimulateLosePockage(msg);
-        for (var i = 0; i < Planet.ships.length; i++) {
+        for (var i = 0; i < Planet.length; i++) {
             if (Planet.ships[i] != undefined && Planet.ships[i] != null) {
                 Planet.ships[i].ReceiveMag(msg);
             }
@@ -179,11 +172,10 @@ var Mediator = {
             if (this.ErrorNum <= 0) {
                 //
                 this.ErrorNum++;
-                setTimeout("Mediator.DealMsgQueue()", 300);
+                setTimeout(this.DealMsgQueue(), 300);
                 //this.DealMsgQueue();
                 console.log("接收到消息，300ms后重新广播。。。");
             } else {
-                setTimeout("Mediator.DealMsgQueue()", 300);
                 console.log("已经接收到消息，正在准备重新广播。。。");
             }
         }
@@ -194,7 +186,7 @@ var Mediator = {
             var m = this.MsgQueue.shift();
             m = null;
             delete m;
-            setTimeout("Mediator.DealMsgQueue()", 300);
+            setTimeout(this.DealMsgQueue(), 300);
             console.log("消息广播成功，发送下一条。。。");
             //this.DealMsgQueue();
             //}else{
@@ -207,7 +199,7 @@ var Mediator = {
         //
         var nmsg = "";
         for (var i = 0; i < msg.length; i++) {
-            if (Math.random() > 0.01) {
+            if (Math.random() > 0.1) {
                 nmsg += msg[i];
             }
         }
@@ -239,9 +231,6 @@ var spaceShip = {
         // 消息转换器
         spaceship.adapter;
 
-        // 定时执行的对象
-        spaceship.interval;
-
         // 广播消息
         spaceship.RadioMsg = function (bmsg) {
             //
@@ -250,30 +239,31 @@ var spaceShip = {
         // 接收消息
         spaceship.ReceiveMag = function (msg) {
             //
-            if (spaceship.adapter.Check(msg)) {
+            if(spaceship.adapter.Check(msg))
+            {
                 var ship = spaceship.adapter.Decode(msg);
-                if (ship.id == spaceship.id) {
+                if(ship.id == spaceship.id)
+                {
                     //
-                    if (ship.state == "飞行") {
-                        if (!spaceship.state)
-                        { spaceship.state = true }
+                    if(ship.state=="飞行")
+                    {
+                        if(!spaceship.state)
+                        {spaceship.state = true}
                         //
-                    } else if (ship.state == "停止") {
+                    }else if(ship.state=="停止"){
                         //
-                        if (spaceship.state)
-                        { spaceship.state = false }
-                    } else if (ship.state == "销毁") {
+                        if(spaceship.state)
+                        {spaceship.state = false}
+                    }else if(ship.state=="销毁"){
                         //
-                        Mediator.MsgReplyed("OK");
                         spaceship.destory();
-                    }
+                    } 
                     Mediator.MsgReplyed("OK");
                 }
-            } else {
+            }else{
                 Mediator.MsgReplyed("LP");
             }
         }
-        // 创建
         spaceship.Create = function () {
             spaceship.ptag = document.getElementById("tagspace");
             spaceship.tag = document.createElement("div");
@@ -284,7 +274,7 @@ var spaceShip = {
             spaceship.ptag.appendChild(spaceship.tag);
             spaceship.adapter = new Adapter.createNew();
 
-            spaceship.interval = setInterval(spaceship.run, 1000);
+            setInterval(spaceship.run, 1000);
         }
         // 前进的主方法
         spaceship.start = function () {
@@ -293,7 +283,7 @@ var spaceShip = {
         // 前进
         spaceship.run = function () {
             //
-            //console.log('normal');
+            console.log('normal');
             // 能量恢复
             if (spaceship.curenergy < 100)
                 spaceship.curenergy += spaceship.energy.recover;
@@ -312,7 +302,7 @@ var spaceShip = {
             }
 
             var result = centerPoint.calaulate(spaceship.track, spaceship.power.speed, spaceship.second);  // 计算当前位置
-            //console.log(result);
+            console.log(result);
             spaceship.left = result.v;
             spaceship.top = result.h;
             spaceship.rotate = result.ang;
@@ -330,13 +320,9 @@ var spaceShip = {
             var parent = document.getElementById("tagspace");
             var child = document.getElementById(spaceship.tag.id);
             parent.removeChild(child);
-            clearInterval(spaceship.interval);
             // var tag = document.getElementById(spaceship.tag.id);
             // document.body.removeChild(tag);
             spaceship = null;
-            var a = {};
-            a.a = spaceship;
-            delete a.a;
             delete spaceship;
         }
 
@@ -400,7 +386,6 @@ var BindAToSelectRadio = function () {
 var Planet = {
     // 
     ships: [],
-    adapter: new Adapter.createNew(),
     getShipById: function (id) {
         for (var i = 0; i < this.ships.length; i++) {
             if (this.ships[i] != undefined && this.ships[i] != null && this.ships[i].id == id) {
@@ -433,8 +418,6 @@ var Planet = {
         var ship = this.getShipById(id);
         if (type == "create") {
             //
-            /* 
-            */
             if (ship != null) {
                 console.log("飞船已经存在！");
                 return;
@@ -463,35 +446,14 @@ var Planet = {
         }
         if (type == "start") {
             //
-            //var transfer = new Adapter.createNew();
-            var order = this.adapter.Encode(this.CombineOrder(id, type));
-            Mediator.PushMsg(order);
-            //ship.start();
+            ship.start();
         } else if (type == "stop") {
             //
-            var order = this.adapter.Encode(this.CombineOrder(id, type));
-            Mediator.PushMsg(order);
-            //ship.stop();
+            ship.stop();
         } else if (type == "destory") {
             //
-            var order = this.adapter.Encode(this.CombineOrder(id, type));
-            Mediator.PushMsg(order);
-            //this.shipDestory(id);
+            this.shipDestory(id);
         }
-    },
-    CombineOrder: function (id, type) {
-        // 
-        var ship = {};
-        ship.id = id;
-        if (type == "stop") {
-            ship.state = "停止";
-        } else if (type == "start") {
-            ship.state = "飞行";
-        } else {
-            ship.state = "销毁";
-        }
-        ship.energy = 0;
-        return ship;
     }
 }
 
@@ -499,7 +461,6 @@ window.onload = function () {
     //
     //spaceships = [];
     BindAToSelectRadio();  // 绑定按钮
-    Mediator.DealMsgQueue();
     //console.log(power.GetType(1));
     /* 
         s1 = new spaceShip.createNew();
